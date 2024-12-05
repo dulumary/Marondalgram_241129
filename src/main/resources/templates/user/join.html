@@ -39,6 +39,16 @@
 	    <script layout:fragment="script">
 	    	$(document).ready(function() {
 	    		
+	    		var isDuplicateCheck = false;
+	    		var isDuplicateId = true;
+	    		
+	    		$("#idInput").on("input", function() {
+	    			isDuplicateCheck = false;
+	    			isDuplicateId = true;
+	    			$("#availableText").addClass("d-none");
+	    			$("#duplicateText").addClass("d-none");
+	    		});
+	    		
 	    		$("#duplicateBtn").on("click", function() {
 	    			let id = $("#idInput").val();
 	    			
@@ -52,12 +62,17 @@
 	    				, url:"/user/duplicate-id"
 	    				, data:{"loginId":id}
 	    				, success:function(response) {
+	    					
+	    					isDuplicateCheck = true;
+	    					
 	    					if(response.isDuplicate) {
 	    						$("#duplicateText").removeClass("d-none");
 	    						$("#availableText").addClass("d-none");
+	    						isDuplicateId = true;
 	    					} else {
 	    						$("#availableText").removeClass("d-none");
 	    						$("#duplicateText").addClass("d-none");
+	    						isDuplicateId = false;
 	    					}
 	    				}
 	    				, error:function() {
@@ -78,6 +93,17 @@
         				alert("아이디를 입력하세요");
         				return ;
         			}
+        			
+        			if(!isDuplicateCheck) {
+        				alert("중복체크를 해주세요");
+        				return ;
+        			}
+        			
+        			if(isDuplicateId) {
+        				alert("중복된 아이디 입니다");
+        				return ;
+        			}
+        			
         			
         			if(password == "") {
         				alert("비밀번호를 입력하세요");
