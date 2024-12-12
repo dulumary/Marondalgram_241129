@@ -1,5 +1,9 @@
 package com.marondal.marondalgram.post.dto;
 
+import java.util.List;
+
+import com.marondal.marondalgram.comment.domain.Comment;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,5 +19,10 @@ public class CardDTO {
 	private String imagePath;
 	
 	private String loginId;
+	
+	private int likeCount;
+	private boolean isLike;
+	
+	List<Comment> commentList;
 
 }

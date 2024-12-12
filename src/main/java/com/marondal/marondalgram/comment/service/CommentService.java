@@ -1,5 +1,7 @@
 package com.marondal.marondalgram.comment.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.marondal.marondalgram.comment.domain.Comment;
@@ -30,5 +32,13 @@ public class CommentService {
 		}
 		
 	}
+	
+	
+	public List<Comment> getCommentList(int postId) {
+		return commentRepository.findByPostId(postId);
+	}
+	
+	
+	
 
 }
