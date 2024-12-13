@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.marondal.marondalgram.comment.domain.Comment;
+import com.marondal.marondalgram.comment.dto.CommentDTO;
 import com.marondal.marondalgram.comment.service.CommentService;
 import com.marondal.marondalgram.common.FileManager;
 import com.marondal.marondalgram.like.service.LikeService;
@@ -70,7 +70,7 @@ public class PostService {
 			
 			boolean isLike = likeService.isLike(post.getId(), loginUserId);
 			
-			List<Comment> commentList = commentService.getCommentList(post.getId());
+			List<CommentDTO> commentList = commentService.getCommentList(post.getId());
 			
 			CardDTO card = CardDTO.builder()
 			.postId(post.getId())
