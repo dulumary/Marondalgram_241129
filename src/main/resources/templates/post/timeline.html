@@ -81,9 +81,17 @@
 	<script layout:fragment="script">
 		$(document).ready(function() {
 			
+			$(".more-btn").on("click", function() {
+				
+				let postId = $(this).data("post-id");
+				// modal 의 삭제 버튼인 a 태그에 data-post-id 값을 추가한다
+				$("#deleteBtn").data("post-id", postId);
+				
+			});
+			
 			$("#deleteBtn").on("click", function() {
 				
-				//let postId = $(this).data("post-id");
+				let postId = $(this).data("post-id");
 				
 				$.ajax({
 					type:"delete"
