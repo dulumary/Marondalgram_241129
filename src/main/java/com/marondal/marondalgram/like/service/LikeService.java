@@ -1,5 +1,7 @@
 package com.marondal.marondalgram.like.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.marondal.marondalgram.like.domain.Like;
@@ -29,6 +31,21 @@ public class LikeService {
 		}
 	}
 	
+	public boolean deleteLike(int postId, int userId) {
+		
+		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
+		
+		if(optionalLike.isPresent()) {
+			Like like = optionalLike.get();
+			
+			likeRepository.delete(like);
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
 	public int getLikeCount(int postId) {
 		return likeRepository.countByPostId(postId);
 	}
@@ -42,6 +59,14 @@ public class LikeService {
 			return false;
 		}
 	}
+	
+	
+	public void deleteLikeByPostId(int postId) {
+		likeRepository.deleteByPostId(postId);
+	}
+	
+	
+	
 	
 	
 }
